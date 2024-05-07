@@ -36,5 +36,6 @@ public class Main {
                 System.out.println("Error at index " + i);
             }
         }
+        System.out.println("In docker");
     }
 }

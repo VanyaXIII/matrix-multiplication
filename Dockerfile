@@ -30,5 +30,9 @@ chmod +x ${nvidia_binary} &&\
 ./${nvidia_binary} --accept-license --ui=none --no-kernel-module --no-questions &&\
 rm -rf ${nvidia_binary}
 
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+RUN apt-get -yq install unzip zip curl && apt-get clean && curl -s "https://get.sdkman.io" | bash 
+RUN bash -c "source /root/.sdkman/bin/sdkman-init.sh && sdk install java && sdk install gradle 8.5 && sdk install kotlin" 
+
 ENTRYPOINT ["/bin/bash"]
 
