@@ -1,20 +1,16 @@
 package org.example;
 
-
-import com.aparapi.device.Device;
-import com.aparapi.device.OpenCLDevice;
 import org.example.multiplication.CPUMultiplier;
 import org.example.multiplication.GPUMultiplier;
 import org.example.multiplication.Multiplier;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        int m = 2;
-        int k = 2;
-        int n = 2;
+        int m = 1024;
+        int k = 1024;
+        int n = 1024;
 
         float[] firstMat = new float[m * k];
         float[] secondMat = new float[n * k];
@@ -27,7 +23,7 @@ public class Main {
             secondMat[i] = r.nextFloat();
         }
 
-        Multiplier gpuMultiplier = new GPUMultiplier(OpenCLDevice.listDevices(Device.TYPE.GPU).getFirst(), firstMat, secondMat, m, k, n);
+        Multiplier gpuMultiplier = new GPUMultiplier(firstMat, secondMat, m, k, n);
         gpuMultiplier.calculate();
 
         Multiplier cpuMultiplier = new CPUMultiplier(firstMat, secondMat, m, k, n);
