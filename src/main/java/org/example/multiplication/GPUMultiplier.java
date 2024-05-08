@@ -4,11 +4,14 @@ import com.aparapi.Kernel;
 import com.aparapi.Range;
 import com.aparapi.device.Device;
 import com.aparapi.device.OpenCLDevice;
+import lombok.Getter;
 import org.example.utils.Pair;
 
 public class GPUMultiplier extends Multiplier {
 
     private final Pair<Kernel, Range> program;
+    @Getter
+    private final Device device;
 
     private static Device getDefaultDevice() {
         if (!OpenCLDevice.listDevices(Device.TYPE.GPU).isEmpty()) {
@@ -37,6 +40,7 @@ public class GPUMultiplier extends Multiplier {
         if (device == null) {
             throw new IllegalArgumentException("No devices available");
         }
+        this.device = device;
         this.firstMat = firstMat;
         this.secondMat = secondMat;
         this.resultMat = new float[m * n];

@@ -23,7 +23,8 @@ public class Main {
             secondMat[i] = r.nextFloat();
         }
 
-        Multiplier gpuMultiplier = new GPUMultiplier(firstMat, secondMat, m, k, n);
+        GPUMultiplier gpuMultiplier = new GPUMultiplier(firstMat, secondMat, m, k, n);
+        System.out.println("Running at " + gpuMultiplier.getDevice().toString());
         gpuMultiplier.calculate();
 
         Multiplier cpuMultiplier = new CPUMultiplier(firstMat, secondMat, m, k, n);
@@ -36,6 +37,5 @@ public class Main {
                 System.out.println("Error at index " + i);
             }
         }
-        System.out.println("In docker");
     }
 }
